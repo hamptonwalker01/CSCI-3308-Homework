@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>About Me</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+      .navbar-nav {
+        margin-left: 50px
+      }
+
+      .navbar-brand {
+        margin-right: 20px;        
+      }
+      
+      .navbar-light{
+        background-color: #C2C2C2;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="mypage_bootstrap.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="projects.html">Projects</a>
+      </li>
+    </ul>
+    <a class="navbar-brand ml-auto" href="https://github.com/hamptonwalker01">
+      <img src="pictures/github.png" class="rounded float-right" alt="Logo" width=40px, height=40px> 
+    </a>
+  </nav>
+  <body>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+      <h2>Add New Interest</h2>
+    <form>
+      <div class="form-group">
+        <label for="inputInterestName">Interest Name</label>
+        <input type="name" class="form-control" id="interestName" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <label for="inputAboutInterest">Text About Interest</label>
+        <textarea class="form-control" id="aboutInterest" rows="4"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <label for="uploadImage">Upload Local Image: </label>
+          <input type="file" class="form-control-file" id="imageUpload">
+        </div>
+        <div class="col">
+          <label for="tweetSelect">Select Number of Tweets to Display</label>
+          <select class="form-control" id="selectTweets">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="interestGuage">On a scale of 1-5, how intersted in this are you?</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+        <label class="form-check-label" for="inlineCheckbox1">1</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+        <label class="form-check-label" for="inlineCheckbox2">2</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+        <label class="form-check-label" for="inlineCheckbox3">3</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+        <label class="form-check-label" for="inlineCheckbox4">4</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
+        <label class="form-check-label" for="inlineCheckbox5">5</label>
+      </div>
+      <div class="form-row">
+        <label for="adminVerify">Log in to Finish Submitting: </label>
+        <div class="col">
+          <input type="username" class="form-control" id="userVerify" placeholder="Username">
+        </div>
+        <div class="col">
+          <input type="password" class="form-control" id="userPass" placeholder="Password">
+        </div>
+      </div>
+    </form>
+    <a href="mypage_bootstrap.html">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </a>
+    </div>
+  </body>
+</html>
