@@ -1,3 +1,4 @@
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 /*
 [IMPORTANT]
 You are free to create any number of helper function you want.
@@ -5,10 +6,12 @@ We know the problem could be seached online, and we are aware of those solutions
 So please sight sources if you took help from any online resource.
 */
 
+const { kill, exit } = require("process");
+
 
 
 //IDs for all the table elements. You get the cell element just by using document.getElementById("A1")
-var table_ids = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"]
+var table_ids = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"];
 
 /*
 An integer array of length 9. 
@@ -19,18 +22,18 @@ Similarly, A move by player 2(who is O) at Cell 'A3' --- The board_state[2] will
 We store the move of player 1 as '1' and player 2 as '0'. So after the above two moves the state should look like
 [1, -1, 0, -1, -1, -1, -1, -1, -1]
 */
-var board_state = [-1,-1,-1,-1,-1,-1,-1,-1,-1]
+var board_state = [-1,-1,-1,-1,-1,-1,-1,-1,-1];
 
 
 // A flag to keep track of the status of the game, false means the game is not started. The default value is set to false
-var started = false
+var started = false;
 
 /* 
 A variable to keep track of each players turn. Since the game always starts with player 1 - The default value is set to '1'
 1 means player_1
 0 means player_0
 */
-var turn = 1 
+var turn = 1 ;
 
 /*
  @Return boolean
@@ -38,8 +41,8 @@ var turn = 1
  The methods @Returns true is the _str is null or it has a length of 0, otherwise, the methods returns false
 */
 function isEmpty(_str) {
-	return (!_str || 0 === _str.length)
-}
+	return (!_str || 0 === _str.length);
+};
 
 /*
 @Return int This return the turn variable. Please note that 
@@ -48,8 +51,8 @@ turn = 0 is for player_2
 @Param - No param
 */
 function whose_move(){
-	return this.turn
-}
+	return this.turn;
+};
 
 /*
 @Return void
@@ -59,8 +62,8 @@ if the turn is set to 1 it will make it 0
 if the turn is set to 0 it will make it 1
 */
 function toggle_move() {
-	this.turn = !this.turn
-}
+	this.turn = !this.turn;
+};
 
 /*
 @Return boolean
@@ -72,9 +75,8 @@ When the game has not started the flag is set to false. As soon as the game star
 Once the game has finished or user has clicked on reset_play the flag must be set to false.
 */
 function game_started(){
-	return this.started
-}
-
+	return this.started;
+};
 
 /*
 TODO - Rule 1
@@ -88,8 +90,31 @@ The method should do all the validations as stated in rule 1.
 */
 
 function begin_play(){
+	var player1_id = document.getElementById("player1_id");
+	var player2_id = document.getElementById("player2_id");
+	var turn = document.getElementById("turn_info");
 
-}
+	if (isEmpty(player1_id.value)) {
+		alert("Player 1 must have a name!");
+		exit(1);
+	} else if (isEmpty(player2_id.value)) {
+		alert("Player 2 must have a name!");
+		exit(1);
+	}
+
+	player1_id.disabled = true;
+	player2_id.disabled = true;
+
+	if(!game_started()) {
+		player1_id.value = player1_id.value + " (X)";
+		player2_id.value = player2_id.value + " (O)";
+		started = true;
+		reset = false;
+		turn.innerHTML = "Turn for: <strong>X</strong>";
+	} else {
+		alert("Game already started! Select reset_play to play again!");
+	}
+};
 
 /*
 TODO - Rule 2
@@ -102,8 +127,21 @@ The method should do all the things as stated in rule 2.
 Remember to set the strated flag as false
 
 */
-function reset_play(){
 
+function reset_play() {
+	var ids = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"];
+	var player1_id = document.getElementById("player1_id");
+	var player2_id = document.getElementById("player2_id");
+	for(var i = 0; i < ids.length; ++i) {
+		document.getElementById(ids[i]).innerHTML = ids[i];
+	}
+	document.getElementById("turn_info").innerHTML = "Turn for: <strong>X</strong>";
+	player1_id.disabled = false;
+	player2_id.disabled = false;
+	player1_id.value = "";
+	player2_id.value = "";
+	document.getElementById("move_text_id").value = "";
+	started = false;
 }
 
 /*
@@ -123,6 +161,26 @@ The method should do all the things as stated in rule 2.
 
 */
 function play() {
+	var input = document.getElementById("move_text_id").value;
+	var turn = document.getElementById("turn_info");
+	var ids = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"];
+	if(ids.findIndex(input) == -1) {
+		alert("Invalid Move!");
+	} else {
+		var move = whose_move();
+		if (move == 1) {
+			toggle_move();
+			console.log("Toggled move");
+			
+			document.getElementById(input).innerHTML = "<strong>X</strong>";
+			turn.innerHTML = "Turn for: <strong>O</strong>";
+		} else {
+			toggle_move();
+			document.getElementById(input).innerHTML = "<strong>O</strong>";
+			turn.innerHTML = "Turn for: <strong>X</strong>";
+		}
+	}
+	console.log(input);
 	
 }
 
@@ -131,8 +189,8 @@ Do not change this method.
 */
 function moveEnter(event) {		
 	if(event.keyCode == 13) {
-		event.preventDefault()
-		play()
+		event.preventDefault();
+		play();
 	}
 
 }
